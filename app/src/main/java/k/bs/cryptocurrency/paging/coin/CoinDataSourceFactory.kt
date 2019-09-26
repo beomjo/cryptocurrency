@@ -1,21 +1,20 @@
-package k.bs.cryptocurrency.paging.search
+package k.bs.cryptocurrency.paging.coin
 
 import androidx.paging.DataSource
-import androidx.paging.PositionalDataSource
 import k.bs.cryptocurrency.common.SchedulerProvider
 import k.bs.cryptocurrency.koin.getKoinInstance
 import k.bs.cryptocurrency.model.ModelCoin
 import k.bs.cryptocurrency.paging.base.OnDataSourceLoading
+import k.bs.cryptocurrency.scene.list.adapter.CoinItemVm
 
-class CoinDataFactory(
-    private var loading: OnDataSourceLoading
-) : DataSource.Factory<Int, ModelCoin>() {
+class CoinDataSourceFactory(private var loading: OnDataSourceLoading) :
+    DataSource.Factory<Int, CoinItemVm>() {
 
     lateinit var source: CoinDataSource
 
     private val schedulerProvider = getKoinInstance<SchedulerProvider>()
 
-    override fun create(): PositionalDataSource<ModelCoin> {
+    override fun create(): DataSource<Int, CoinItemVm> {
         source = CoinDataSource(schedulerProvider)
         source.onDataSourceLoading = loading
         return source

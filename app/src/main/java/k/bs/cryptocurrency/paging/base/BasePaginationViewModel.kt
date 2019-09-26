@@ -8,7 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 
-abstract class BasePaginationViewModel<T : DataSource.Factory<Boolean, K>, K> {
+abstract class BasePaginationViewModel<T : DataSource.Factory<Int, K>, K> {
     private var compositeDisposable: CompositeDisposable = CompositeDisposable()
     protected abstract var dataSourceFactory: T
     private var pagedObservable: Observable<PagedList<K>>? = null

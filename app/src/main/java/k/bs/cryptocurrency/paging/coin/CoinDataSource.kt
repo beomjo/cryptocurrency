@@ -1,4 +1,4 @@
-package k.bs.cryptocurrency.paging.search
+package k.bs.cryptocurrency.paging.coin
 
 import android.util.Log
 import androidx.paging.PositionalDataSource
@@ -9,27 +9,33 @@ import k.bs.cryptocurrency.api.ApiService
 import k.bs.cryptocurrency.common.SchedulerProvider
 import k.bs.cryptocurrency.model.ModelCoin
 import k.bs.cryptocurrency.paging.base.OnDataSourceLoading
+import k.bs.cryptocurrency.scene.list.adapter.CoinItemVm
 
 class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
-    PositionalDataSource<ModelCoin.Coin>() {
+    PositionalDataSource<CoinItemVm>() {
     private val TAG = this::class.java.canonicalName
 
     lateinit var onDataSourceLoading: OnDataSourceLoading
-    protected var compositeDisposable = CompositeDisposable()
+    private var compositeDisposable = CompositeDisposable()
 
     private val startPosition = 0
 
     override fun loadInitial(
         params: LoadInitialParams,
-        callback: LoadInitialCallback<ModelCoin.Coin>
+        callback: LoadInitialCallback<CoinItemVm>
     ) {
+
+        Log.d("bsjo","bsjo  params.pageSize ${params.pageSize}")
+        Log.d("bsjo","bsjo  params.requestedLoadSize ${params.requestedLoadSize}")
+        Log.d("bsjo","bsjo  params.requestedStartPosition ${params.requestedStartPosition}")
+
         onDataSourceLoading.onFirstFetch()
 
         loadCoins(offset = 0)
             .subscribe({ result ->
                 if (result.data.coins.isNotEmpty()) {
-                    onDataSourceLoading.onFirstFetchEndWithoutData()
-                    callback.onResult(result.data.coins, startPosition, result.data.stats.total)
+                    onDataSourceLoading.onFirstFetchEndWithData()
+                    callback.onResult(result.data.coins.map { CoinItemVm(it) }, startPosition, result.data.stats.total)
                 } else
                     onDataSourceLoading.onFirstFetchEndWithoutData()
             }, { e ->
@@ -38,10 +44,15 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
             .let(this::addDisposable)
     }
 
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<ModelCoin.Coin>) {
-        loadCoins(offset = params.loadSize)
+    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<CoinItemVm>) {
+
+        Log.d("bsjo","bsjo  params.startPosition ${params.startPosition}")
+        Log.d("bsjo","bsjo  params.loadSize ${params.loadSize}")
+        onDataSourceLoading.onPageLoading()
+
+        loadCoins(offset = params.startPosition)
             .subscribe({ result ->
-                callback.onResult(result.data.coins)
+                callback.onResult(result.data.coins.map { CoinItemVm(it) })
                 onDataSourceLoading.onPageLoadingEnd()
             }, { e ->
                 submitError(e)

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="k.bs.cryptocurrency.scene.list.adapter.CoinItemVm" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            loadImage="@{vm.iconUrl}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintBottom_toTopOf="@id/guide1"
+            app:layout_constraintEnd_toStartOf="@id/guide2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="10dp"
+            android:text="@{vm.name}"
+            app:layout_constraintBottom_toTopOf="@id/symbol"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guide2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name" />
+
+        <TextView
+            android:id="@+id/symbol"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@{vm.symbol}"
+            app:layout_constraintBottom_toTopOf="@+id/price"
+            app:layout_constraintEnd_toEndOf="@id/name"
+            app:layout_constraintStart_toEndOf="@id/guide2"
+            app:layout_constraintStart_toStartOf="@id/name"
+            app:layout_constraintTop_toBottomOf="@id/name"
+            tools:text="symbol" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:text="@{vm.price}"
+            app:layout_constraintBottom_toTopOf="@id/pavorite"
+            app:layout_constraintEnd_toEndOf="@id/symbol"
+            app:layout_constraintStart_toEndOf="@id/guide2"
+            app:layout_constraintStart_toStartOf="@id/symbol"
+            app:layout_constraintTop_toBottomOf="@id/symbol"
+            tools:text="price" />
+
+        <ImageView
+            android:id="@+id/pavorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/heart2"
+            app:layout_constraintBottom_toTopOf="@id/guide1"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="150dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="150dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
