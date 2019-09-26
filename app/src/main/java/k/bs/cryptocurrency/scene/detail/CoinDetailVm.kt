@@ -1,8 +1,13 @@
 package k.bs.cryptocurrency.scene.detail
 
+import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import k.bs.cryptocurrency.common.util.rxresult.putObject
+import k.bs.cryptocurrency.common.util.rxresult.startActivity
+import k.bs.cryptocurrency.common.util.rxresult.toIntent
 import k.bs.cryptocurrency.model.ModelCoin
+import k.bs.cryptocurrency.scene.web.WebActivity
 import java.lang.StringBuilder
 
 class CoinDetailVm {
@@ -13,6 +18,7 @@ class CoinDetailVm {
     val history = ObservableField<String>()
     val change = ObservableField<String>()
     val isFavorite = ObservableBoolean(false)
+    var webSiteUrl = ""
 
     fun init(arguments: ModelCoin.Coin) {
         iconUrl.set(arguments.iconUrl)
@@ -29,9 +35,17 @@ class CoinDetailVm {
         }.toString())
         change.set(arguments.change.toString())
         isFavorite.set(arguments.isCheck)
+        webSiteUrl = arguments.websiteUrl
     }
 
     fun check() {
         isFavorite.set(!isFavorite.get())
+    }
+
+    fun moveWeb(v: View) {
+        WebActivity::class.java.toIntent()
+            .putObject(webSiteUrl)
+            .startActivity(v.context)
+            .subscribe()
     }
 }

@@ -25,7 +25,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@color/colorPrimary" />
+            tools:src="@color/colorPrimary"
+            android:onClick="@{(v)->vm.moveWeb(v)}"/>
 
         <TextView
             android:id="@+id/description"
