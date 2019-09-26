@@ -55,7 +55,7 @@ abstract class BasePaginationViewModel<T : DataSource.Factory<Int, K>, K> {
             }
 
             override fun onFirstFetchEndWithData() {
-                showDataLoadingProgress()
+                hideDataLoadingProgress()
             }
 
             override fun onFirstFetchEndWithoutData() {

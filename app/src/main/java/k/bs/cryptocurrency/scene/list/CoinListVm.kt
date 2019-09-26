@@ -1,6 +1,7 @@
 package k.bs.cryptocurrency.scene.list
 
 import android.util.Log
+import androidx.databinding.ObservableBoolean
 import k.bs.cryptocurrency.BR
 import k.bs.cryptocurrency.R
 import k.bs.cryptocurrency.paging.base.BasePaginationViewModel
@@ -11,10 +12,9 @@ class CoinListVm
     : BasePaginationViewModel<CoinDataSourceFactory, CoinItemVm>() {
 
     override var dataSourceFactory: CoinDataSourceFactory = CoinDataSourceFactory(getListener())
-
     override fun getPageSize(): Int = 10
-
     val adapter = CoinAdapter(R.layout.item_coin, BR.vm)
+    val progressbarVisibility = ObservableBoolean(false)
 
     init {
         submitItems()
@@ -54,7 +54,7 @@ class CoinListVm
 
         dataLoadingSubject
             .subscribe(
-                { show -> },
+                { show -> progressbarVisibility.set(show.peek()) },
                 {}
             )
             .let(this::addDisposable)
