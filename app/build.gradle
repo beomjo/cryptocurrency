@@ -49,8 +49,15 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
 
-    //glide
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.github.bumptech.glide:annotations:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
+
+
+    implementation 'com.caverock:androidsvg:1.2.1'
+
 
     //rx
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
