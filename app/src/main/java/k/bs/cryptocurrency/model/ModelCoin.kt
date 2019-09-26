@@ -26,7 +26,7 @@ data class ModelCoin(
         val firstSeen: Long = 0,
         val history: List<String> = listOf(),
         val iconType: String = "",
-        val iconUrl: String = "",
+        val iconUrl: String = "",//
         val id: Int = 0,
         val links: List<Link> = listOf(),
         val marketCap: Long = 0,
@@ -34,16 +34,16 @@ data class ModelCoin(
         val numberOfExchanges: Int = 0,
         val numberOfMarkets: Int = 0,
         val penalty: Boolean = false,
-        val price: String = "",
+        val price: String = "",//
         val rank: Int = 0,
         val slug: String = "",
         val socials: List<Social> = listOf(),
-        val symbol: String = "",
+        val symbol: String = "",//
         val totalSupply: Double = 0.0,
         val type: String = "",
         val uuid: String = "",
         val volume: Long = 0,
-        val websiteUrl: String = ""
+        val websiteUrl: String = ""//
     )
 
     data class AllTimeHigh(
