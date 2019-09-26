@@ -6,12 +6,13 @@ import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import k.bs.cryptocurrency.api.ApiService
+import k.bs.cryptocurrency.base.BaseSchedulerProvider
 import k.bs.cryptocurrency.common.SchedulerProvider
 import k.bs.cryptocurrency.model.ModelCoin
 import k.bs.cryptocurrency.paging.base.OnDataSourceLoading
 import k.bs.cryptocurrency.scene.list.CoinItemVm
 
-class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
+class CoinDataSource(private val schedulerProvider: BaseSchedulerProvider) :
     PositionalDataSource<CoinItemVm>() {
     private val TAG = this::class.java.canonicalName
 
@@ -24,11 +25,6 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
         params: LoadInitialParams,
         callback: LoadInitialCallback<CoinItemVm>
     ) {
-
-        Log.d("bsjo","bsjo  params.pageSize ${params.pageSize}")
-        Log.d("bsjo","bsjo  params.requestedLoadSize ${params.requestedLoadSize}")
-        Log.d("bsjo","bsjo  params.requestedStartPosition ${params.requestedStartPosition}")
-
         onDataSourceLoading.onFirstFetch()
 
         loadCoins(offset = 0)
@@ -49,9 +45,6 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
     }
 
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<CoinItemVm>) {
-
-        Log.d("bsjo","bsjo  params.startPosition ${params.startPosition}")
-        Log.d("bsjo","bsjo  params.loadSize ${params.loadSize}")
         onDataSourceLoading.onPageLoading()
 
         loadCoins(offset = params.startPosition)
@@ -84,7 +77,7 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
         compositeDisposable.add(disposable)
     }
 
-    private fun loadCoins(offset: Int): Single<ModelCoin> {
+    fun loadCoins(offset: Int): Single<ModelCoin> {
         return ApiService.cryptoCurrency().coin(offset = offset)
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.ui())

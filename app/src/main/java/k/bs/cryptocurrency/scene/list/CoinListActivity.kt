@@ -11,6 +11,5 @@ class CoinListActivity :
     @LayoutRes
     override val resId: Int = R.layout.activity_coin_list
 
-    override val viewModel: CoinListVm =
-        CoinListVm()
+    override val viewModel: CoinListVm =CoinListVm()
 }
