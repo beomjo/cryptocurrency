@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import k.bs.cryptocurrency.R
-import k.bs.cryptocurrency.model.ModelCoin
 import k.bs.cryptocurrency.paging.base.BaseDiffAdapter
 import k.bs.cryptocurrency.paging.base.VIEW_TYPE_NORMAL
+import k.bs.cryptocurrency.scene.list.CoinItemVm
 
 class CoinAdapter(
     @LayoutRes val layout: Int,

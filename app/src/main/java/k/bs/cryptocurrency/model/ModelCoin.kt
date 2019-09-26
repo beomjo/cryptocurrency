@@ -43,7 +43,8 @@ data class ModelCoin(
         val type: String = "",
         val uuid: String = "",
         val volume: Long = 0,
-        val websiteUrl: String = ""//
+        val websiteUrl: String = "",//
+        var isCheck: Boolean = false
     )
 
     data class AllTimeHigh(

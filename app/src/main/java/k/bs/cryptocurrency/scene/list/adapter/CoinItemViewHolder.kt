@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import k.bs.cryptocurrency.model.ModelCoin
+import k.bs.cryptocurrency.scene.list.CoinItemVm
 
 class CoinItemViewHolder(
     @LayoutRes layout: Int,

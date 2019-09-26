@@ -9,7 +9,7 @@ import k.bs.cryptocurrency.api.ApiService
 import k.bs.cryptocurrency.common.SchedulerProvider
 import k.bs.cryptocurrency.model.ModelCoin
 import k.bs.cryptocurrency.paging.base.OnDataSourceLoading
-import k.bs.cryptocurrency.scene.list.adapter.CoinItemVm
+import k.bs.cryptocurrency.scene.list.CoinItemVm
 
 class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
     PositionalDataSource<CoinItemVm>() {
@@ -35,7 +35,11 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
             .subscribe({ result ->
                 if (result.data.coins.isNotEmpty()) {
                     onDataSourceLoading.onFirstFetchEndWithData()
-                    callback.onResult(result.data.coins.map { CoinItemVm(it) }, startPosition, result.data.stats.total)
+                    callback.onResult(result.data.coins.map {
+                        CoinItemVm(
+                            it
+                        )
+                    }, startPosition, result.data.stats.total)
                 } else
                     onDataSourceLoading.onFirstFetchEndWithoutData()
             }, { e ->
@@ -52,7 +56,11 @@ class CoinDataSource(private val schedulerProvider: SchedulerProvider) :
 
         loadCoins(offset = params.startPosition)
             .subscribe({ result ->
-                callback.onResult(result.data.coins.map { CoinItemVm(it) })
+                callback.onResult(result.data.coins.map {
+                    CoinItemVm(
+                        it
+                    )
+                })
                 onDataSourceLoading.onPageLoadingEnd()
             }, { e ->
                 submitError(e)

@@ -5,14 +5,17 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="vm"
-            type="k.bs.cryptocurrency.scene.list.adapter.CoinItemVm" />
+            type="k.bs.cryptocurrency.scene.list.CoinItemVm" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(v)->vm.moveDetail(v)}"
         android:orientation="vertical">
 
         <ImageView
@@ -20,11 +23,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
+            android:src="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@id/guide1"
             app:layout_constraintEnd_toStartOf="@id/guide2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@color/colorAccent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/name"
@@ -72,7 +75,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/heart2"
+            android:src="@{vm.isFavorite ? @drawable/heart1 :@drawable/heart2}"
             app:layout_constraintBottom_toTopOf="@id/guide1"
             app:layout_constraintEnd_toEndOf="parent" />
 

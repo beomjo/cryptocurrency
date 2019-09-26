@@ -6,7 +6,6 @@ import k.bs.cryptocurrency.R
 import k.bs.cryptocurrency.paging.base.BasePaginationViewModel
 import k.bs.cryptocurrency.paging.coin.CoinDataSourceFactory
 import k.bs.cryptocurrency.scene.list.adapter.CoinAdapter
-import k.bs.cryptocurrency.scene.list.adapter.CoinItemVm
 
 class CoinListVm
     : BasePaginationViewModel<CoinDataSourceFactory, CoinItemVm>() {
