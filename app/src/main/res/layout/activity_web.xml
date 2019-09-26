@@ -2,7 +2,7 @@
 <layout>
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="k.bs.cryptocurrency.scene.web.WebVm" />
@@ -16,9 +16,20 @@
         tools:context=".scene.web.WebActivity">
 
         <WebView
+            android:visibility="@{vm.isLoadingEnd ? View.VISIBLE : View.GONE}"
+            loadingListener="@{vm.loadingListener}"
             url="@{vm.url}"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="@{vm.isLoadingEnd ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
