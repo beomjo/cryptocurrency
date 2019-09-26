@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
+import k.bs.cryptocurrency.common.util.round
 import k.bs.cryptocurrency.common.util.rxresult.putObject
 import k.bs.cryptocurrency.common.util.rxresult.startActivityForResult
 import k.bs.cryptocurrency.common.util.rxresult.toIntent
@@ -14,7 +15,7 @@ class CoinItemVm(private val model: ModelCoin.Coin) {
     val iconUrl get() = model.iconUrl
     val name get() = model.name
     val symbol get() = model.symbol
-    val price get() = model.price
+    val price get() = model.price.round(2)
 
     val isFavorite = ObservableBoolean(false)
 

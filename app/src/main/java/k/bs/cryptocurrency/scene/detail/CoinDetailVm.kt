@@ -3,6 +3,7 @@ package k.bs.cryptocurrency.scene.detail
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import k.bs.cryptocurrency.common.util.round
 import k.bs.cryptocurrency.common.util.rxresult.putObject
 import k.bs.cryptocurrency.common.util.rxresult.startActivity
 import k.bs.cryptocurrency.common.util.rxresult.toIntent
@@ -24,7 +25,7 @@ class CoinDetailVm {
         iconUrl.set(arguments.iconUrl)
         description.set(arguments.description)
         volume.set(arguments.volume.toString())
-        price.set(arguments.price)
+        price.set(arguments.price.round(2))
         history.set(arguments.history.take(7).let {
             StringBuilder().apply {
                 appendln()
